@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'logic.dart';
+import 'controller.dart';
 
 class SquarePage extends StatelessWidget {
   final count = 0.obs;
