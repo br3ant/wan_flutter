@@ -5,6 +5,7 @@ import 'package:wan_flutter/common/http/base_response.dart';
 class BaseProvider extends GetConnect {
   @override
   void onInit() {
+    print("BaseProvider onInit");
     httpClient.baseUrl = 'https://www.wanandroid.com/';
 
     // 请求拦截

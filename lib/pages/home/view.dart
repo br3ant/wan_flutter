@@ -8,22 +8,41 @@ import 'package:wan_flutter/pages/home/bindings.dart';
 import 'package:wan_flutter/pages/home/controller.dart';
 import 'package:wan_flutter/pages/home/entity/article.dart';
 import 'package:wan_flutter/pages/home/entity/banner.dart';
+import 'package:wan_flutter/pages/home/provider.dart';
 
-class HomePage extends GetView<HomeController> {
-  HomePage() {
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _HomePageState();
+  }
+}
+
+class _HomePageState extends State<HomePage> {
+  _HomePageState() {
     HomeBinding().dependencies();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return const _HomePageGetX();
+  }
+}
+
+class _HomePageGetX extends GetView<HomeController> {
+  const _HomePageGetX({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Obx(() => Column(
-              children: [
-                _buildBanners(controller.banners),
-                _buildArticleList(controller.articles),
-              ],
-            )),
+          children: [
+            _buildBanners(controller.banners),
+            _buildArticleList(controller.articles),
+          ],
+        )),
       ),
     );
   }
@@ -34,14 +53,15 @@ class HomePage extends GetView<HomeController> {
 
       ///轮播图控件
       child: Swiper(
+        key: UniqueKey(),
         itemCount: banners.length,
         itemBuilder: (_, i) => Image.network("${banners[i].imagePath}", fit: BoxFit.cover),
         autoplay: true,
         pagination: const SwiperPagination(
           alignment: Alignment.bottomRight,
           builder: DotSwiperPaginationBuilder(
-            activeSize: 15,
-            size: 10,
+            activeSize: 10,
+            size: 6,
             activeColor: Colors.blue,
             color: Colors.grey,
           ),

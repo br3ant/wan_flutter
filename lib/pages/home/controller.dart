@@ -19,38 +19,29 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print("HomeController onInit");
     getBanners();
     getArticlePageList();
   }
 
-  Future<void> getBanners() async {
-    bannerProvider.getBanners().then((value) => {_replaceBanners(value.toBaseResponse())},
-        onError: (e) {
-      Get.snackbar("Error", e.toString());
-    });
+  void getBanners() {
+    bannerProvider
+        .getBanners()
+        .then((value) => banners.assignAll(value))
+        .catchError((e) => {Get.snackbar("Error", e.toString())});
   }
 
   // 拉取文章列表
   Future<void> getArticlePageList() async {
-    // 获取数据
-    articleProvider.getArticles(page.value).then((value) => {_addArticle(value.toBaseResponse())},
-        onError: (e) {
-      Get.snackbar("Error", e.toString());
-    });
+    await articleProvider
+        .getArticles(page.value)
+        .then((value) => articles.addAll(value))
+        .catchError((e) => {Get.snackbar("Error", e.toString())});
   }
 
   Future<void> reset() async {
     page.value = 0;
     articles.clear();
-    await getArticlePageList();
-  }
-
-  void _replaceBanners(BaseResponse baseResponse) {
-    banners.assignAll((baseResponse.data as List<dynamic>).map((e) => BannerBean.fromJson(e)));
-  }
-
-  void _addArticle(BaseResponse baseResponse) {
-    var data = PageList<Article>.formJson(baseResponse.data, Article.fromJson);
-    articles.addAll(data.datas);
+    getArticlePageList();
   }
 }
