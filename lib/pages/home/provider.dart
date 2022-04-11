@@ -4,7 +4,7 @@ import 'package:wan_flutter/pages/home/entity/article.dart';
 import 'package:wan_flutter/pages/home/entity/banner.dart';
 
 abstract class IArticleProvider {
-  Future<List<Article>> getArticles(int page);
+  Future<PageList<Article>> getArticles(int page);
 }
 
 abstract class IBannerProvider {
@@ -14,8 +14,8 @@ abstract class IBannerProvider {
 class ArticleProvider extends BaseProvider implements IArticleProvider {
   // 文章分页
   @override
-  Future<List<Article>> getArticles(int page) => get("/article/list/$page/json").then(
-      (value) => PageList<Article>.formJson(value.toBaseResponse().data, Article.fromJson).datas);
+  Future<PageList<Article>> getArticles(int page) => get("/article/list/$page/json")
+      .then((value) => PageList<Article>.formJson(value.toBaseResponse().data, Article.fromJson));
 }
 
 class BannerProvider extends BaseProvider implements IBannerProvider {

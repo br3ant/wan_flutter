@@ -37,16 +37,8 @@ dependencies:
 
   get: ^4.1.4
 
-  # dio
-  dio: ^4.0.0
   dio_cookie_manager: ^2.0.0
   cookie_jar: 3.0.1
-
-  # webview
-  webview_flutter: ^2.0.4
-
-  # 刷新
-  flutter_easyrefresh: ^2.2.1
 
   # 动画
   flare_flutter: ^3.0.0
@@ -54,8 +46,37 @@ dependencies:
   #轮播图
   flutter_card_swipper: ^0.4.0
 
-  # 屏幕适配
-  flutter_screenutil: ^5.0.0
+  #toast https://pub.flutter-io.cn/packages/fluttertoast
+  fluttertoast: ^8.0.8
+
+  # 网络请求库 https://github.com/flutterchina/dio
+  dio: 4.0.0
+  # 网络检测 https://pub.flutter-io.cn/packages/connectivity
+  connectivity: 3.0.6
+  # 加载SVG图片 https://pub.flutter-io.cn/packages/flutter_svg
+  flutter_svg: 0.22.0
+  # lottie动画 https://pub.flutter-io.cn/packages/flutter_lottie
+  lottie: ^1.1.0
+  # SP键值对存储 https://pub.flutter-io.cn/packages/shared_preferences
+  shared_preferences: ^2.0.6
+  # WebView
+  webview_flutter: ^2.0.12
+  #读取相册
+  image_picker: 0.8.3+3
+  # https://github.com/flutter/plugins/tree/master/packages/url_launcher
+  url_launcher: ^6.0.9
+  #文件路径管理工具类
+  path_provider: ^2.0.2
+  #上拉刷新、下拉加载
+  pull_to_refresh: ^2.0.0
+  #加载html标签
+  flutter_html: ^2.1.2
+  #调用分享平台 https://pub.flutter-io.cn/packages/share
+  share: ^2.0.4
+  #圖片保存到本地 https://pub.flutter-io.cn/packages/image_gallery_saver
+  image_gallery_saver: ^1.7.1
+  #权限申请框架 https://pub.flutter-io.cn/packages/permission_handler
+  permission_handler: ^8.1.6
 
 dev_dependencies:
   flutter_test:
@@ -81,7 +102,16 @@ flutter:
 
   assets:
     - assets/flare/
-    - assets/
+    - assets/images/
+    - assets/images/3.0x/
+    - assets/svg/
+    - assets/lottie/lottie_common_load.json
+    - assets/lottie/page_loading_anim.json
+    - assets/lottie/refresh_footer.json
+    - assets/lottie/refresh_head_loading.json
+    - assets/lottie/refresh_empty_page.json
+    - assets/lottie/refresh_error.json
+    - assets/lottie/collect_success.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

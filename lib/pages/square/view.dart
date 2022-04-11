@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wan_flutter/common/base/get/get_common_view.dart';
+import 'package:wan_flutter/common/base/get/get_save_state_view.dart';
 
 import 'controller.dart';
 
-class SquarePage extends StatelessWidget {
-  final count = 0.obs;
+class SquarePage extends GetSaveView<SquareController> {
+  const SquarePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(child: Obx(() => Text('广场: $count', style: const TextStyle(fontSize: 30)))),
+        body: Center(child: Text('广场: ${controller.count}', style: const TextStyle(fontSize: 30))),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => {count.value++},
+          onPressed: () => controller
+            ..count += 1
+            ..update(),
           child: const Icon(Icons.add),
         ));
   }

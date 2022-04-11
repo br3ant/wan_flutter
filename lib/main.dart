@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wan_flutter/common/res/strings.dart';
 import 'package:wan_flutter/common/routes/app_pages.dart';
 import 'package:wan_flutter/pages/main/index.dart';
 
@@ -17,6 +18,13 @@ class MyApp extends StatelessWidget {
       enableLog: true,
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
+
+      ///国际化支持-来源配置
+      translations: Messages(),
+      ///国际化支持-默认语言
+      locale: const Locale('zh', 'CN'),
+      ///国际化支持-备用语言
+      fallbackLocale: const Locale('en', 'US'),
     );
   }
 }
