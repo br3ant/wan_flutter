@@ -14,8 +14,7 @@ class LoginController extends GetxController {
   String password = "";
 
   Future<void> login() async {
-    if (account.isEmpty ||
-        password.isEmpty) {
+    if (account.isEmpty || password.isEmpty) {
       return;
     }
 
@@ -31,15 +30,13 @@ class LoginController extends GetxController {
       return;
     }
 
-    provider.login(account, password).then((value) => {})
-        .catchError((e) => {Get.snackbar("Error", e.toString())});
+    provider.login(account, password).then((value) => {}).catchError((e) {
+      Get.snackbar("Error", e.toString());
+    });
   }
 
   ///当前按钮是否可点击
-  bool changeShowButton(){
-    return account.isNotEmpty &&
-        password.isNotEmpty;
+  bool changeShowButton() {
+    return account.isNotEmpty && password.isNotEmpty;
   }
-
-
 }

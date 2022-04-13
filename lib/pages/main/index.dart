@@ -17,11 +17,11 @@ class _MainViewState extends State<MainView> {
   final items = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
     const BottomNavigationBarItem(icon: Icon(Icons.square), label: '广场'),
-    // const BottomNavigationBarItem(icon: Icon(Icons.person), label: '公众号'),
+    const BottomNavigationBarItem(icon: Icon(Icons.message), label: '公众号'),
     const BottomNavigationBarItem(icon: Icon(Icons.person), label: '我的')
   ];
 
-  final bodyList = [HomePage(), SquarePage(), MinePage()];
+  final bodyList = const [HomePage(), SquarePage(), OfficialPage(), MinePage()];
 
   final pageController = PageController();
 
@@ -48,7 +48,13 @@ class _MainViewState extends State<MainView> {
             physics: const NeverScrollableScrollPhysics(), // 禁止滑动
           ),
         ),
-        bottomNavigationBar:
-            BottomNavigationBar(items: items, currentIndex: currentIndex, onTap: onTap));
+        bottomNavigationBar: BottomNavigationBar(
+          items: items,
+          currentIndex: currentIndex,
+          onTap: onTap,
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+        ));
   }
 }

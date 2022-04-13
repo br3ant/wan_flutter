@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:wan_flutter/common/base/get/get_common_view.dart';
 import 'package:wan_flutter/common/res/button_style.dart';
 import 'package:wan_flutter/common/res/colors.dart';
 import 'package:wan_flutter/common/res/style.dart';
 import 'package:wan_flutter/common/utils/keyboard_util.dart';
 import 'package:wan_flutter/pages/login/controller.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetCommonView<LoginController> {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text("登陆"),
-      ),
-      body: SafeArea(
-          child: GetBuilder<LoginController>(
-        builder: (controller) => Container(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: Text("登陆"),
+        ),
+        body: Container(
           width: double.infinity,
           height: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               InputView(
@@ -62,9 +63,7 @@ class LoginPage extends StatelessWidget {
               )
             ],
           ),
-        ),
-      )),
-    );
+        ));
   }
 }
 
