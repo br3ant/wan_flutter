@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wan_flutter/common/app/app_theme.dart';
 import 'package:wan_flutter/common/res/strings.dart';
 import 'package:wan_flutter/common/routes/app_pages.dart';
 import 'package:wan_flutter/pages/main/index.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       enableLog: true,
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
-
+      ///主题颜色
+      theme: appThemeData,
       ///国际化支持-来源配置
       translations: Messages(),
       ///国际化支持-默认语言

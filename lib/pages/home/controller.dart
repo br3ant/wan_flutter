@@ -1,12 +1,13 @@
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wan_flutter/common/base/get/controller/base_page_controller.dart';
+import 'package:wan_flutter/common/base/get/get_extension.dart';
 import 'package:wan_flutter/common/http/base_provider.dart';
 import 'package:wan_flutter/common/http/base_response.dart';
 import 'package:wan_flutter/common/utils/ext/refresher_extension.dart';
 import 'package:wan_flutter/common/widget/pull_smart_refresher.dart';
-import 'package:wan_flutter/pages/home/entity/article.dart';
-import 'package:wan_flutter/pages/home/entity/banner.dart';
+import 'package:wan_flutter/pages/entity/article.dart';
+import 'package:wan_flutter/pages/entity/banner.dart';
 
 import 'provider.dart';
 
@@ -27,9 +28,9 @@ class HomeController extends BaseGetPageController {
   }
 
   @override
-  void requestData(RefreshController controller, {Refresh refresh = Refresh.first}) {
+  void requestData(RefreshController controller,
+      {Refresh refresh = Refresh.first}) {
     articleProvider.getArticles(page).then((value) {
-
       RefreshExtension.onSuccess(controller, refresh, value.over);
 
       ///下拉刷新需要清除列表
@@ -42,7 +43,7 @@ class HomeController extends BaseGetPageController {
       showSuccess(articles);
 
       update();
-    }).catchError((e) => {Get.snackbar("Error", e.toString())});
+    }).catchError((e) => Get.showErrorDialog(e));
   }
 
   void getBanners() {

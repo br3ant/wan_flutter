@@ -1,7 +1,7 @@
 import 'package:wan_flutter/common/http/base_provider.dart';
 import 'package:wan_flutter/common/http/base_response.dart';
-import 'package:wan_flutter/pages/home/entity/article.dart';
-import 'package:wan_flutter/pages/home/entity/banner.dart';
+import 'package:wan_flutter/pages/entity/article.dart';
+import 'package:wan_flutter/pages/entity/banner.dart';
 
 abstract class IArticleProvider {
   Future<PageList<Article>> getArticles(int page);

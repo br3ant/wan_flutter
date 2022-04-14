@@ -34,14 +34,14 @@ class RefreshWidget<Controller extends BaseGetPageController>
     this.enablePullDown = true,
     this.onRefresh,
     this.onLoadMore,
+    required this.getController,
     required this.child,
   }) : super(key: key);
 
-  final String? tag = null;
 
   ///获取BaseGetController子类对象，在GetX中，任何BaseGetController都可以通过此方法获取
   ///但是必须是没有dispose的Controller
-  Controller get getController => GetInstance().find<Controller>(tag: tag);
+  Controller getController;
 
   ///是否启用上拉
   bool enablePullUp = true;

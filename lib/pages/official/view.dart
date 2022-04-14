@@ -6,7 +6,7 @@ import 'package:wan_flutter/common/res/colors.dart';
 import 'package:wan_flutter/common/res/style.dart';
 import 'package:wan_flutter/common/widget/pull_smart_refresher.dart';
 import 'package:wan_flutter/common/widget/ripple_widget.dart';
-import 'package:wan_flutter/pages/official/entitys/OfficialTab.dart';
+import 'package:wan_flutter/pages/entity/official_tab.dart';
 import 'package:wan_flutter/pages/official/provider.dart';
 import 'package:wan_flutter/pages/widget/article_view.dart';
 
@@ -19,8 +19,7 @@ class OfficialPage extends StatefulWidget {
   State<StatefulWidget> createState() => _OfficialPageState();
 }
 
-class _OfficialPageState extends State<OfficialPage>
-    with SingleTickerProviderStateMixin {
+class _OfficialPageState extends State<OfficialPage> with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   List<OfficialTab> tabs = [];
@@ -48,22 +47,33 @@ class _OfficialPageState extends State<OfficialPage>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
-      child: Column(
-        children: [
-          TabBar(
-              isScrollable: true,
-              labelColor: ColorStyle.color_24CF5F,
-              unselectedLabelColor: ColorStyle.color_B8C0D4,
-              controller: _tabController,
-              labelStyle: Styles.style_FE8C28_24_bold,
-              unselectedLabelStyle: Styles.style_FFAE2E_16,
-              tabs: tabs.map((e) => Tab(text: e.name!)).toList()),
-          TabBarView(children: ['1'].map((e) => _OfficialTabView(e)).toList())
-        ],
-      ),
+      child: tabs.isEmpty
+          ? const Center(
+              child: Text("没有数据"),
+            )
+          : Column(
+              children: [
+                TabBar(
+                    isScrollable: true,
+                    labelColor: ColorStyle.color_24CF5F,
+                    unselectedLabelColor: ColorStyle.color_B8C0D4,
+                    controller: _tabController,
+                    labelStyle: Styles.style_FE8C28_24_bold,
+                    unselectedLabelStyle: Styles.style_FFAE2E_16,
+                    tabs: tabs.map((e) => Tab(text: e.name!)).toList()),
+                Expanded(
+                  child: TabBarView(
+                      controller: _tabController,
+                      children: tabs.map((e) {
+                        final officialId = e.id.toString();
+                        return _OfficialTabView(officialId);
+                      }).toList()),
+                )
+              ],
+            ),
     );
   }
 }
@@ -71,25 +81,30 @@ class _OfficialPageState extends State<OfficialPage>
 class _OfficialTabView extends GetCommonView<OfficialController> {
   final String officialId;
 
-  _OfficialTabView(this.officialId, {Key? key}) : super(key: key) {
-    Get.lazyPut(() => OfficialController(Get.find(), officialId),
-        tag: officialId);
-  }
+  const _OfficialTabView(this.officialId, {Key? key}) : super(key: key);
+
+  @override
+  String? get tag => officialId;
+
+  @override
+  OfficialController get init => OfficialController(Get.find(), officialId);
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Container(
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
       color: Colors.white,
       child: RefreshWidget<OfficialController>(
+        getController: controller,
         child: ListView.builder(
-            itemBuilder: (context, index) => Material(
-                color: Colors.transparent,
-                child: Ripple(
-                  onTap: () => {},
-                  child: MainArticleView(controller.articles[index]),
-                ))),
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            itemCount: controller.articles.length,
+            itemBuilder: (context, index) {
+              return MainArticleView(controller.articles[index]);
+            }),
       ),
-    ));
+    );
   }
 }

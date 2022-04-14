@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wan_flutter/common/res/colors.dart';
+import 'package:wan_flutter/common/utils/screen_util.dart';
 import 'package:wan_flutter/pages/home/view.dart';
 import 'package:wan_flutter/pages/mine/view.dart';
 import 'package:wan_flutter/pages/official/view.dart';
@@ -39,6 +41,7 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.removeSystemTransparent(context);
     return Scaffold(
         body: SafeArea(
           child: PageView(

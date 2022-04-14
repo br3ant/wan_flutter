@@ -6,7 +6,7 @@ import 'package:wan_flutter/common/res/strings.dart';
 
 /// @class : GetExtension
 
-/// 
+///
 /// @description :get 扩展方法
 extension GetExtension on GetInterface {
   ///隐藏dialog
@@ -44,16 +44,21 @@ extension GetExtension on GetInterface {
     }
     Get.dialog(
         CommonDialog(
-          title : title,
-          content : content,
-          backText : backText.isEmpty ? StringStyles.quit.tr : backText,
-          nextText : nextText.isEmpty ? StringStyles.enter.tr : nextText,
-          backVisible : backVisible,
-          nextVisible : nextVisible,
-          backTap : backTap,
-          nextTap : nextTap,
+          title: title,
+          content: content,
+          backText: backText.isEmpty ? StringStyles.quit.tr : backText,
+          nextText: nextText.isEmpty ? StringStyles.enter.tr : nextText,
+          backVisible: backVisible,
+          nextVisible: nextVisible,
+          backTap: backTap,
+          nextTap: nextTap,
         ),
         transitionDuration: const Duration(milliseconds: 500),
         barrierDismissible: backKey);
+  }
+
+  //显示错误提示弹窗
+  showErrorDialog(Exception e) {
+    showDialog(title: "Error", content: e.toString(), backVisible: false);
   }
 }

@@ -2,11 +2,10 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 
 /// @class : GetCommonView
-/// 
+///
 /// @description :基类,用于绑定Controller
 abstract class GetCommonView<T extends GetxController> extends StatefulWidget {
-
-  const GetCommonView({ Key? key }) : super(key: key);
+  const GetCommonView({Key? key}) : super(key: key);
 
   final String? tag = null;
 
@@ -14,6 +13,8 @@ abstract class GetCommonView<T extends GetxController> extends StatefulWidget {
 
   ///Get 局部更新字段
   get updateId => null;
+
+  T? get init => null;
 
   @protected
   Widget build(BuildContext context);
@@ -23,7 +24,7 @@ abstract class GetCommonView<T extends GetxController> extends StatefulWidget {
 }
 
 /// @class : AutoDisposeState
-/// 
+///
 /// @description :基类,可自动装载的状态管理
 class AutoDisposeState<S extends GetxController> extends State<GetCommonView> {
   AutoDisposeState();
@@ -32,6 +33,8 @@ class AutoDisposeState<S extends GetxController> extends State<GetCommonView> {
   Widget build(BuildContext context) {
     return GetBuilder<S>(
         id: widget.updateId,
+        init: widget.init as S?,
+        tag: widget.tag,
         builder: (controller) {
           return widget.build(context);
         });

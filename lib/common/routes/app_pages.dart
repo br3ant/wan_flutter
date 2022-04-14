@@ -21,8 +21,8 @@ class AppPages {
 
   static final List<GetPage> routes = [
     GetPage(name: AppRoutes.main, page: () => const MainView(), binding: MainBinding()),
-    GetPage(name: AppRoutes.article, page: () => ArticlePage(), binding: ArticleBinding()),
-    GetPage(name: AppRoutes.login, page: () => LoginPage(), binding: LoginBinding()),
-    GetPage(name: AppRoutes.register, page: () => RegisterPage(), binding: RegisterBinding()),
+    GetPage(name: AppRoutes.article, page: () => const ArticlePage(), binding: ArticleBinding()),
+    GetPage(name: AppRoutes.login, page: () => const LoginPage(), binding: LoginBinding()),
+    GetPage(name: AppRoutes.register, page: () => const RegisterPage(), binding: RegisterBinding()),
   ];
 }

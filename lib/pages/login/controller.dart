@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wan_flutter/common/base/get/get_extension.dart';
 import 'package:wan_flutter/common/utils/toast_util.dart';
 import 'package:wan_flutter/pages/login/provider.dart';
 
@@ -31,7 +32,7 @@ class LoginController extends GetxController {
     }
 
     provider.login(account, password).then((value) => {}).catchError((e) {
-      Get.snackbar("Error", e.toString());
+      Get.showErrorDialog(e);
     });
   }
 
