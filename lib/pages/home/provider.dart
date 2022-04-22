@@ -24,10 +24,6 @@ class BannerProvider extends BaseProvider implements IBannerProvider {
       get("/banner/json").then((value) => _formatBanners(value.toBaseResponse()));
 
   List<BannerBean> _formatBanners(BaseResponse baseResponse) {
-    final data = <BannerBean>[];
-    for (dynamic e in baseResponse.data as List<dynamic>) {
-      data.add(BannerBean.fromJson(e));
-    }
-    return data;
+    return <BannerBean>[for (dynamic e in baseResponse.data as List<dynamic>) BannerBean.fromJson(e)];
   }
 }

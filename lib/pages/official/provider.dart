@@ -12,11 +12,7 @@ abstract class IOfficialProvider {
 class OfficialProvider extends BaseProvider implements IOfficialProvider {
   @override
   Future getOfficialTabs() => get('/wxarticle/chapters/json').then((value) {
-        var tabs = <OfficialTab>[];
-        for (var data in value.toBaseResponse().data as List<dynamic>) {
-          tabs.add(OfficialTab.fromJson(data));
-        }
-        return tabs;
+        return <OfficialTab>[for (var data in value.toBaseResponse().data as List<dynamic>) OfficialTab.fromJson(data)];
       });
 
   @override
