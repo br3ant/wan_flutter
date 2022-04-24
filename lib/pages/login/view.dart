@@ -3,11 +3,13 @@ import 'package:get/get.dart';
 import 'package:wan_flutter/common/base/get/get_common_view.dart';
 import 'package:wan_flutter/common/res/button_style.dart';
 import 'package:wan_flutter/common/res/colors.dart';
+import 'package:wan_flutter/common/res/r.dart';
 import 'package:wan_flutter/common/res/strings.dart';
 import 'package:wan_flutter/common/res/style.dart';
 import 'package:wan_flutter/common/routes/app_pages.dart';
 import 'package:wan_flutter/common/utils/keyboard_util.dart';
 import 'package:wan_flutter/pages/login/controller.dart';
+import 'package:wan_flutter/pages/widget/edit_widget.dart';
 
 class LoginPage extends GetCommonView<LoginController> {
   const LoginPage({Key? key}) : super(key: key);
@@ -22,23 +24,32 @@ class LoginPage extends GetCommonView<LoginController> {
         body: Container(
           width: double.infinity,
           height: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(R.assetsImagesLoginBackground), fit: BoxFit.cover)),
           child: Column(
             children: [
-              InputView(
-                  hintText: "username",
-                  onChanged: (s) => {
-                        controller
-                          ..account = s
-                          ..update()
-                      }),
-              InputView(
-                  hintText: "password",
-                  onChanged: (s) {
-                    controller
-                      ..password = s
-                      ..update();
-                  }),
+              ///账户名输入框
+              EditWidget(
+                iconWidget: const Icon(
+                  Icons.perm_identity,
+                  color: Colors.white,
+                ),
+                hintText: StringStyles.loginAccountNameHint.tr,
+                onChanged: (text) => controller
+                  ..account = text
+                  ..update(),
+              ),
+
+              ///密码输入框
+              EditWidget(
+                iconWidget: const Icon(Icons.lock_open, color: Colors.white),
+                hintText: StringStyles.loginAccountPwdHint.tr,
+                passwordType: true,
+                onChanged: (text) => controller
+                  ..password = text
+                  ..update(),
+              ),
               Container(
                 width: double.infinity,
                 height: 50,

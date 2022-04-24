@@ -7,6 +7,8 @@ import 'package:wan_flutter/pages/main/binding.dart';
 import 'package:wan_flutter/pages/main/index.dart';
 import 'package:wan_flutter/pages/register/binding.dart';
 import 'package:wan_flutter/pages/register/view.dart';
+import 'package:wan_flutter/pages/tutorial/tutorial_chapter/binding.dart';
+import 'package:wan_flutter/pages/tutorial/tutorial_chapter/view.dart';
 
 class AppRoutes {
   static const main = '/main';
@@ -14,6 +16,7 @@ class AppRoutes {
   static const home = '/home';
   static const login = '/login';
   static const register = '/register';
+  static const tutorialChapter = '/tutorialChapter';
 }
 
 class AppPages {
@@ -24,5 +27,9 @@ class AppPages {
     GetPage(name: AppRoutes.article, page: () => const ArticlePage(), binding: ArticleBinding()),
     GetPage(name: AppRoutes.login, page: () => const LoginPage(), binding: LoginBinding()),
     GetPage(name: AppRoutes.register, page: () => const RegisterPage(), binding: RegisterBinding()),
+    GetPage(
+        name: AppRoutes.tutorialChapter,
+        page: () => TutorialChapterPage(),
+        binding: TutorialChapterBinding()),
   ];
 }

@@ -5,6 +5,8 @@ import 'package:wan_flutter/pages/mine/controller.dart';
 import 'package:wan_flutter/pages/mine/provider.dart';
 import 'package:wan_flutter/pages/official/provider.dart';
 import 'package:wan_flutter/pages/square/controller.dart';
+import 'package:wan_flutter/pages/tutorial/logic.dart';
+import 'package:wan_flutter/pages/tutorial/provider.dart';
 
 class MainBinding extends Bindings {
   @override
@@ -24,5 +26,9 @@ class MainBinding extends Bindings {
     //mine
     Get.lazyPut<IMineProvider>(() => MineProvider());
     Get.lazyPut(() => MineController(Get.find()));
+
+    //tutorial
+    Get.lazyPut<ITutorialProvider>(() => TutorialProvider());
+    Get.lazyPut(() => TutorialController(Get.find()));
   }
 }

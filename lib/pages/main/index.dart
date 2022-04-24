@@ -5,6 +5,7 @@ import 'package:wan_flutter/pages/home/view.dart';
 import 'package:wan_flutter/pages/mine/view.dart';
 import 'package:wan_flutter/pages/official/view.dart';
 import 'package:wan_flutter/pages/square/view.dart';
+import 'package:wan_flutter/pages/tutorial/view.dart';
 
 class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
@@ -18,12 +19,12 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   final items = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
-    const BottomNavigationBarItem(icon: Icon(Icons.square), label: '广场'),
+    const BottomNavigationBarItem(icon: Icon(Icons.square), label: '教程'),
     const BottomNavigationBarItem(icon: Icon(Icons.message), label: '公众号'),
     const BottomNavigationBarItem(icon: Icon(Icons.person), label: '我的')
   ];
 
-  final bodyList = const [HomePage(), SquarePage(), OfficialPage(), MinePage()];
+  final bodyList = const [HomePage(), TutorialPage(), OfficialPage(), MinePage()];
 
   final pageController = PageController();
 
