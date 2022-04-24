@@ -1,4 +1,6 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:wan_flutter/common/base/get/get_extension.dart';
 import 'package:wan_flutter/common/routes/app_pages.dart';
 import 'package:wan_flutter/common/utils/save/sp_util.dart';
 import 'package:wan_flutter/common/utils/toast_util.dart';
@@ -16,21 +18,40 @@ class MineController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    notifyUserInfo();
+    var info = SpUtil.getUserInfo();
+    if (info != null) {
+      userInfo = info;
+      update();
+    }
   }
 
   /// 更新用户信息，每次进入时更新
   void notifyUserInfo() {
     provider.getUserInfo().then((value) {
-      userInfo = value;
-      update();
-      SpUtil.notifyUserInfo(value);
+      _saveUserInfo(value);
     }, onError: (e) {
       ToastUtils.show(e.toString());
     });
   }
 
-  void navigation2Login(){
-    Get.toNamed(AppRoutes.login);
+  void _saveUserInfo(UserEntity user) {
+    userInfo = user;
+    update();
+    SpUtil.notifyUserInfo(user);
+  }
+
+  void _removeUserInfo() {
+    userInfo = null;
+    update();
+    SpUtil.deleteUserInfo();
+  }
+
+  void navigation2Login() async {
+    final user = await Get.toNamed(AppRoutes.login);
+    _saveUserInfo(user);
+  }
+
+  void logout() {
+    Get.showDialog(content: "确认退出登陆?", nextText: "退出", nextTap: () => _removeUserInfo());
   }
 }

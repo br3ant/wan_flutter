@@ -29,7 +29,7 @@ class AppPages {
     GetPage(name: AppRoutes.register, page: () => const RegisterPage(), binding: RegisterBinding()),
     GetPage(
         name: AppRoutes.tutorialChapter,
-        page: () => TutorialChapterPage(),
+        page: () => const TutorialChapterPage(),
         binding: TutorialChapterBinding()),
   ];
 }

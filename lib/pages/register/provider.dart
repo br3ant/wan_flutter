@@ -1,15 +1,18 @@
+import 'package:get/get.dart';
 import 'package:wan_flutter/common/http/base_provider.dart';
 
 abstract class IRegisterProvider {
-  Future<void> register(String username, String password, String repassword);
+  Future<bool> register(String username, String password, String repassword);
 }
 
 class RegisterProvider extends BaseProvider implements IRegisterProvider {
   @override
-  Future<void> register(String username, String password, String repassword) =>
-      post('/user/register', {
+  Future<bool> register(String username, String password, String repassword) => post(
+      '/user/registerV2',
+      FormData({
         'username': username,
         'password': password,
-        'repassword': repassword
-      });
+        'repassword': repassword,
+        'verifyCode': '2020'
+      })).then((value) => value.toBaseResponse().errorCode == 0);
 }

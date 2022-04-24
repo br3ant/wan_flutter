@@ -56,8 +56,11 @@ class RegisterController extends GetxController {
     }
 
     provider.register(account, password, rePassword).then((value) {
-      ToastUtils.show(StringStyles.registerSuccess.tr);
-      Get.offAllNamed(AppRoutes.main);
+      if (value) {
+        ToastUtils.show(StringStyles.registerSuccess.tr);
+      } else {
+        ToastUtils.show("error");
+      }
     }).catchError((e) {
       ToastUtils.show(e.toString());
     });

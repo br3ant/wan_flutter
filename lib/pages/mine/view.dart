@@ -26,14 +26,17 @@ class MinePage extends GetSaveView<MineController> {
                   ? GestureDetector(
                       child: const Text("还未登陆，点击登陆", style: Styles.style_1A2F51_14),
                       onTap: () => controller.navigation2Login())
-                  : Text(controller.userInfo?.username ?? "")
+                  : GestureDetector(
+                      child:
+                          Text(controller.userInfo?.username ?? "", style: Styles.style_1A2F51_14),
+                      onTap: () => controller.logout())
             ],
           ),
         ));
   }
 
   Widget _avatar() {
-    if (controller.userInfo == null) {
+    if (controller.userInfo == null || controller.userInfo!.icon.isEmpty) {
       return const CircleAvatar(
           radius: 30, backgroundImage: AssetImage("assets/images/avatar.png"));
     } else {
