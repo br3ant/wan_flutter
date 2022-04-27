@@ -10,5 +10,5 @@ class LoginProvider extends BaseProvider implements ILoginProvider {
   @override
   Future<UserEntity> login(String username, String password) =>
       post('/user/login', FormData({"username": username, 'password': password}))
-          .then((value) => UserEntity.fromJson(value.toBaseResponse().data));
+          .then((value) => value.toBean(UserEntity.fromJson));
 }

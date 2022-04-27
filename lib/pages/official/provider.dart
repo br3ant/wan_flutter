@@ -11,12 +11,11 @@ abstract class IOfficialProvider {
 
 class OfficialProvider extends BaseProvider implements IOfficialProvider {
   @override
-  Future getOfficialTabs() => get('/wxarticle/chapters/json').then((value) {
-        return <OfficialTab>[for (var data in value.toBaseResponse().data as List<dynamic>) OfficialTab.fromJson(data)];
-      });
+  Future getOfficialTabs() =>
+      get('/wxarticle/chapters/json').then((value) => value.toList(OfficialTab.fromJson));
 
   @override
   Future<PageList<Article>> getOfficialList(String officialId, int page) =>
-      get('/wxarticle/list/$officialId/$page/json').then(
-          (value) => PageList<Article>.formJson(value.toBaseResponse().data, Article.fromJson));
+      get('/wxarticle/list/$officialId/$page/json')
+          .then((value) => value.toPageList((Article.fromJson)));
 }

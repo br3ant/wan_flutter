@@ -48,7 +48,9 @@ class MineController extends GetxController {
 
   void navigation2Login() async {
     final user = await Get.toNamed(AppRoutes.login);
-    _saveUserInfo(user);
+    if (user != null) {
+      _saveUserInfo(user);
+    }
   }
 
   void logout() {

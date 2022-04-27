@@ -14,6 +14,7 @@ class PageList<T> {
   int curPage = 0;
   int size = 0;
   List<T> datas = [];
+
   ///是否为最后一页
   bool over = false;
 
@@ -21,8 +22,6 @@ class PageList<T> {
     curPage = page['curPage'];
     size = page['size'];
     over = page['over'];
-    for (var json in page['datas']) {
-      datas.add(toElement(json));
-    }
+    datas = <T>[for (var json in page['datas']) toElement(json)];
   }
 }

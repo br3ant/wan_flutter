@@ -10,6 +10,6 @@ class MineProvider extends BaseProvider implements IMineProvider {
   @override
   Future getUserInfo() {
     return get('user/lg/userinfo/json')
-        .then((value) => UserEntity.fromJson(value.toBaseResponse().data));
+        .then((value) => value.toBean(UserEntity.fromJson));
   }
 }

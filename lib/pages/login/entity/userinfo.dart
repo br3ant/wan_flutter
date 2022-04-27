@@ -30,7 +30,7 @@ class UserEntity {
     required this.username,
   });
 
-  UserEntity.fromJson(Map<dynamic, dynamic> json) {
+  UserEntity.fromJson(dynamic json) {
     admin = json["admin"];
     coinCount = json["coinCount"]?.toInt();
     email = json["email"].toString();

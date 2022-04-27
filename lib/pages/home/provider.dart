@@ -15,15 +15,11 @@ class ArticleProvider extends BaseProvider implements IArticleProvider {
   // 文章分页
   @override
   Future<PageList<Article>> getArticles(int page) => get("/article/list/$page/json")
-      .then((value) => PageList<Article>.formJson(value.toBaseResponse().data, Article.fromJson));
+      .then((value) => value.toPageList(Article.fromJson));
 }
 
 class BannerProvider extends BaseProvider implements IBannerProvider {
   @override
   Future<List<BannerBean>> getBanners() =>
-      get("/banner/json").then((value) => _formatBanners(value.toBaseResponse()));
-
-  List<BannerBean> _formatBanners(BaseResponse baseResponse) {
-    return <BannerBean>[for (dynamic e in baseResponse.data as List<dynamic>) BannerBean.fromJson(e)];
-  }
+      get("/banner/json").then((value) => value.toList(BannerBean.fromJson));
 }

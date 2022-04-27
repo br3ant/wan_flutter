@@ -11,13 +11,11 @@ abstract class ITutorialProvider {
 
 class TutorialProvider extends BaseProvider implements ITutorialProvider {
   @override
-  Future<List<TutorialEntity>> getTutorialList() => get('/chapter/547/sublist/json').then((value) =>
-      <TutorialEntity>[
-        for (var json in value.toBaseResponse().data as List<dynamic>) TutorialEntity.fromJson(json)
-      ]);
+  Future<List<TutorialEntity>> getTutorialList() =>
+      get('/chapter/547/sublist/json').then((value) => value.toList(TutorialEntity.fromJson));
 
   @override
   Future<PageList<Article>> getTutorialChapterList(String chapterId, int page) =>
-      get('/article/list/$page/json?cid=$chapterId&order_type=1').then(
-          (value) => PageList<Article>.formJson(value.toBaseResponse().data, Article.fromJson));
+      get('/article/list/$page/json?cid=$chapterId&order_type=1')
+          .then((value) => value.toPageList(Article.fromJson));
 }

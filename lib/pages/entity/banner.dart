@@ -13,7 +13,7 @@ class BannerBean {
       this.url);
 
   //命名构造函数
-  BannerBean.fromJson(Map<String, dynamic> json) {
+  BannerBean.fromJson(dynamic json) {
     desc = json['desc'];
     id = json['id'];
     imagePath = json['imagePath'];
